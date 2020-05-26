@@ -30,6 +30,10 @@ class Svg{
         document.querySelector(this.parentSelector).appendChild(this.DOMELement);
     }
 
+    remove(child){
+        this.DOMELement.removeChild(child);
+    }
+
     // Appends and returns an svg line element
     line(x1,y1,x2,y2,id,className){
         // Create line element
