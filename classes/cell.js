@@ -33,7 +33,7 @@ class Cell{
 
         this.walls = {
             top: this.svgContainer.rect(this.x, this.y, this.width, Cell.wallThickness, '', this.strokeClass),
-            right:  this.svgContainer.rect(this.width + this.x - Cell.wallThickness, this.y, Cell.wallThickness, this.height, '', this.strokeClass),
+            right:  this.svgContainer.rect(this.width + this.x, this.y, Cell.wallThickness, this.height, '', this.strokeClass),
             bottom:  this.svgContainer.rect(this.x, this.y + this.height, this.width, Cell.wallThickness, '', this.strokeClass),
             left: this.svgContainer.rect(this.x, this.y, Cell.wallThickness, this.height, '', this.strokeClass)
         };
