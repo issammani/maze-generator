@@ -19,6 +19,9 @@ class Maze{
                 
         // Initialize maze
         this.initialize();
+
+        // Bind generateMaze to this context
+        this.generateMaze = this.generateMaze.bind(this);
     }
 
     initialize(){
@@ -40,8 +43,6 @@ class Maze{
     * https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_backtracker
     */
     generateMaze(){
-        if( !this.S.isEmpty() ){
-
             // Pop a cell from the stack and make it a current cell
             this.currentCell = this.S.pop();
 
@@ -59,10 +60,9 @@ class Maze{
                 randomNeighbour.visit();
                 this.S.push(randomNeighbour);
 
-                // // Keep track of visited cells
-                // this.unvisitedCellsCounter--;
+                // Keep track of visited cells
+                this.unvisitedCellsCounter--;
             }
-        }
     }
 
     render(){
@@ -83,5 +83,7 @@ class Maze{
         return !_neighbours.length ? undefined : _neighbours[Math.floor(Math.random() * _neighbours.length)];
     }
 
-
+    done(){
+        return this.S.isEmpty();
+    }
 }
