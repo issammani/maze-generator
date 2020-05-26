@@ -1,5 +1,5 @@
 class Cell{
-    static wallThickness = 2;
+    static wallThickness = 1;
     static wallNames = ['top', 'right', 'bottom', 'left'];
 
     constructor(props){
