@@ -7,15 +7,20 @@ class Cell{
         ({svgContainer: this.svgContainer, 
             width:  this.width = 0, 
             height: this.height = 0,
-            x:  this.x = 0,
-            y:  this.y = 0,
+            i:  this.i = 0,
+            j:  this.j = 0,
             id: this.id = '', 
             strokeClass: this.strokeClass = '',
             fillerClass: this.fillerClass = ''} = props);
 
+        this.x = this.j * this.width;
+        this.y = this.i * this.height;
+
         // A cell is an enclosed space with four walls
         this.walls = {top: null, right: null, bottom: null, left: null};
         this.rect = null; 
+
+        this.visited = false;
         
         this.createElement();
 
@@ -57,5 +62,39 @@ class Cell{
             this.walls[wallName] = null;
         }
     }
+
+    visit(){
+        this.visited = true;
+        this.rect.setAttribute('class', 'visited');
+    }
+
+    isVisited(){
+        return this.visited;
+    }
+
+    removeWallBetween(other){
+
+        // Find adjacent wall
+        const i_delta = other.i - this.i;
+        const j_delta = other.j - this.j;
+
+        if(i_delta === 1){ // Remove top wall from other and bottom from this
+            this.removeWall(2);
+            other.removeWall(0);
+        }else if(i_delta === -1){// Remove bottom wall from other and top from this
+            this.removeWall(0);
+            other.removeWall(2);
+        }else if(j_delta === 1){// Remove left wall from other and right from this
+            this.removeWall(1);
+            other.removeWall(3);
+        }else if(j_delta === -1){// Remove right wall from other and left from this
+            this.removeWall(3);
+            other.removeWall(1);
+        }else{
+            // THROW SOME KIND OF ERROR
+        }
+    }
+
+
 
 }
