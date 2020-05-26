@@ -3,9 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test</title>
+    <title>Maze Generator</title>
+    <style>
+        .area{
+            fill: black;
+        }
+
+        .visited{
+            fill: rgb(8, 1, 37);
+        }
+
+        .wall{
+            fill: rgba(40,50,254.5);
+        }
+        #svg{
+            background-color: rgba(40,50,254,.5);
+        }
+    </style>
 </head>
-<body>
-    <script type="module" src="classes/maze.js"></script>
+<body> 
+    <div class="maze"></div>
+    <script  src="classes/svg.js"></script>
+    <script  src="classes/cell.js"></script>
+    <script  src="classes/stack.js"></script>
+    <script src="classes/animator.js"></script>
+    <script src="classes/maze.js"></script>
+    <script>
+        const m = new Maze({parentSelector: '.maze', gridSize: 500, cellSize: 20, id: 'svg'});
+        m.render();
+        // Animation callback
+        const animationCallback = () => {
+            if(!m.done()){
+                m.generateMaze();
+            }else{
+                a.stop();
+            } 
+        };
+
+        const a = new Animator(10, animationCallback);
+        a.start();
+    </script>
 </body>
 </html>
